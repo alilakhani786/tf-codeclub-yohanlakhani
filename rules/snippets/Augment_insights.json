@@ -1,0 +1,56 @@
+{
+    "name": "Augment insights",
+    "children": [
+        {
+            "name": "Traffic reporting",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "cpCode",
+                    "options": {
+                        "value": {
+                            "id": 1070566,
+                            "description": "yohanlakhani.com",
+                            "products": [
+                                "SPM"
+                            ],
+                            "createdDate": 1595492731000,
+                            "cpCodeLimits": null,
+                            "name": "yohanlakhani.com"
+                        }
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Identify your main traffic segments so you can granularly zoom in your traffic statistics like hits, bandwidth, offload, response codes, and errors."
+        },
+        {
+            "name": "Geolocation",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "edgeScape",
+                    "options": {
+                        "enabled": false
+                    }
+                }
+            ],
+            "criteria": [
+                {
+                    "name": "requestType",
+                    "options": {
+                        "matchOperator": "IS",
+                        "value": "CLIENT_REQ"
+                    }
+                }
+            ],
+            "criteriaMustSatisfy": "all",
+            "comments": "Receive data about a user's geolocation and connection speed in a request header. If you change cached content based on the values of the X-Akamai-Edgescape request header, contact your account representative."
+        }
+    ],
+    "behaviors": [],
+    "criteria": [],
+    "criteriaMustSatisfy": "all",
+    "comments": "Control the settings related to monitoring and reporting. This gives you additional visibility into your traffic and audiences."
+}

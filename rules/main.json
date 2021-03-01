@@ -1,0 +1,108 @@
+{
+    "rules": {
+        "name": "default",
+        "children": [
+            ${file("${snippets}/Augment_insights.json")},
+            ${file("${snippets}/Accelerate_delivery.json")},
+            ${file("${snippets}/Offload_origin.json")}
+        ],
+        "behaviors": [
+            {
+                "name": "origin",
+                "options": {
+                    "cacheKeyHostname": "REQUEST_HOST_HEADER",
+                    "compress": true,
+                    "enableTrueClientIp": true,
+                    "forwardHostHeader": "REQUEST_HOST_HEADER",
+                    "httpPort": 80,
+                    "httpsPort": 443,
+                    "originCertificate": "",
+                    "originSni": true,
+                    "originType": "CUSTOMER",
+                    "ports": "",
+                    "trueClientIpClientSetting": true,
+                    "trueClientIpHeader": "True-Client-IP",
+                    "verificationMode": "CUSTOM",
+                    "hostname": "{{user.PMUSER_ORIGINSERVER}}",
+                    "customValidCnValues": [
+                        "{{Origin Hostname}}",
+                        "{{Forward Host Header}}"
+                    ],
+                    "originCertsToHonor": "COMBO",
+                    "standardCertificateAuthorities": [
+                        "akamai-permissive"
+                    ],
+                    "customCertificateAuthorities": [
+                        {
+                            "subjectCN": "codeclub.yohanlakhani.com",
+                            "subjectAlternativeNames": [
+                                "codeclub.yohanlakhani.com"
+                            ],
+                            "subjectRDNs": {
+                                "CN": "codeclub.yohanlakhani.com"
+                            },
+                            "issuerRDNs": {
+                                "C": "US",
+                                "CN": "R3",
+                                "O": "Let's Encrypt"
+                            },
+                            "notBefore": 1609739999000,
+                            "notAfter": 1617515999000,
+                            "sigAlgName": "SHA256WITHRSA",
+                            "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0LX57dUolHOD9Nget9yRQCSsE4zLaWCAwOhcGoAVg2PQOKcv5Acv072LYL0opEDy9NXtMDkEFl8GWphi4LOrrc3K5vQzYj/y80/IrCYieMy+g7GYbe+M2fnGxGpuanZkaonm5QTQvO/aHVKMew/KpiL/QS5LZnbMA/AuFGecFnLW02Vxm1KIv4GWxE6DiM8Hy03pLm2/Vk9+da+YOOIIhMl5Wt+ioLCHgDDsYr9NymYj/vcwQBgVLHLc1sEB8YR1B1ARFpnn00FaRbcyHJca1YAFnW2x699DkQeTA8i2szIb4jz22EzlRsQFBepg32dVx7rXbXhvFHLSNYOsihgQpwIDAQAB",
+                            "publicKeyAlgorithm": "RSA",
+                            "publicKeyFormat": "X.509",
+                            "serialNumber": "353603439426330458136484891528747858631898",
+                            "version": 3,
+                            "sha1Fingerprint": "5459a66c9058d9e4866476387fa623d097798f64",
+                            "pemEncodedCert": "-----BEGIN CERTIFICATE-----\nMIIFODCCBCCgAwIBAgISBA8lqT4x5GU1Qw8f/DyLOZzaMA0GCSqGSIb3DQEBCwUA\nMDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD\nEwJSMzAeFw0yMTAxMDQwNTU5NTlaFw0yMTA0MDQwNTU5NTlaMCQxIjAgBgNVBAMT\nGWNvZGVjbHViLnlvaGFubGFraGFuaS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IB\nDwAwggEKAoIBAQDQtfnt1SiUc4P02B633JFAJKwTjMtpYIDA6FwagBWDY9A4py/k\nBy/TvYtgvSikQPL01e0wOQQWXwZamGLgs6utzcrm9DNiP/LzT8isJiJ4zL6DsZht\n74zZ+cbEam5qdmRqieblBNC879odUox7D8qmIv9BLktmdswD8C4UZ5wWctbTZXGb\nUoi/gZbEToOIzwfLTekubb9WT351r5g44giEyXla36KgsIeAMOxiv03KZiP+9zBA\nGBUsctzWwQHxhHUHUBEWmefTQVpFtzIclxrVgAWdbbHr30ORB5MDyLazMhviPPbY\nTOVGxAUF6mDfZ1XHutdteG8UctI1g6yKGBCnAgMBAAGjggJUMIICUDAOBgNVHQ8B\nAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB\n/wQCMAAwHQYDVR0OBBYEFEqAd4VZdz/jjk3Y4pMhn4EseA7PMB8GA1UdIwQYMBaA\nFBQusxe3WFbLrlAJQOYfr52LFMLGMFUGCCsGAQUFBwEBBEkwRzAhBggrBgEFBQcw\nAYYVaHR0cDovL3IzLm8ubGVuY3Iub3JnMCIGCCsGAQUFBzAChhZodHRwOi8vcjMu\naS5sZW5jci5vcmcvMCQGA1UdEQQdMBuCGWNvZGVjbHViLnlvaGFubGFraGFuaS5j\nb20wTAYDVR0gBEUwQzAIBgZngQwBAgEwNwYLKwYBBAGC3xMBAQEwKDAmBggrBgEF\nBQcCARYaaHR0cDovL2Nwcy5sZXRzZW5jcnlwdC5vcmcwggEEBgorBgEEAdZ5AgQC\nBIH1BIHyAPAAdgCUILwejtWNbIhzH4KLIiwN0dpNXmxPlD1h204vWE2iwgAAAXbM\nMgdaAAAEAwBHMEUCICYAQgVpLCLDecfZo3VmWp23KBaX08r/w8HgTqcTZMiHAiEA\n2AxWHSb9stoho+Tibt9wYNEgA2abUZFpi8xo4G0cBaMAdgB9PvL4j/+IVWgkwsDK\nnlKJeSvFDngJfy5ql2iZfiLw1wAAAXbMMgeBAAAEAwBHMEUCIBfsDPx0o0PHlnJ9\nX7gh7WQ2DPyiO2bMIYNHR+klWOWgAiEA88eBclgH+CZ6T5sKsC3tcHytEU1uaGvA\nPT5qlzFTEhkwDQYJKoZIhvcNAQELBQADggEBAHP8S8hQA+oEbhZYzh7pl2XxMHzx\nTaMYRojJthqGPCQB+ZnExU1f4Vc9ebqiCqkyy8fJ18ZT5lN1c7IW43BD5/W+rKyr\nPjLhRE7M5ZRl8mx1y+OyIAYfTd742hMxCWIqhi+TLLLyYPDGKZK3Msv91C1MonGz\nfgqb4Ty+fswongti0zQkgfQst7eW8hlPJH4e1pHQ+GTwP/7KrWpIUk4AxlHcPrvf\nj3m7RyeRCR0hKcTxkU9s73SjexsJyTKYZhGxImqT2reUpyYN4+VYTSM+eyPybJMK\ngHTC+7vqPPR57S3QCsmgxNf82xYYXqb9US25Pnn3gBhRVCVqfOWVu6DlK5s=\n-----END CERTIFICATE-----\n",
+                            "canBeLeaf": true,
+                            "canBeCA": false,
+                            "selfSigned": false
+                        },
+                        {
+                            "subjectCN": "R3",
+                            "subjectAlternativeNames": [],
+                            "subjectRDNs": {
+                                "C": "US",
+                                "CN": "R3",
+                                "O": "Let's Encrypt"
+                            },
+                            "issuerRDNs": {
+                                "CN": "DST Root CA X3",
+                                "O": "Digital Signature Trust Co."
+                            },
+                            "notBefore": 1602098500000,
+                            "notAfter": 1632943300000,
+                            "sigAlgName": "SHA256withRSA",
+                            "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuwIVKMz2oJTTDxLsjVWSw/iC8ZmmekKIp10mqrUrucVMsa+Oa/l1yKPXD0eUFFU1V4yeqKI5GfWCPEKpTm71O8Mu243AsFzzWTjn7c9p8FoLG77AlCQlh/o3cbMT5xys4Zvv2+Q7RVJFlqnBU840yFLuta7tj95gcOKlVKu2bQ6XpUA0ayvTvGbrZjR8+muLj1cpmfgwF126cm/7gcWt0oZYPRfH5wm78Sv3htzB2nFd1EbjzK0lwYi8YGd1ZrPxGPeiXOZT/zqItkel/xMY6pgJdz+dU/nPAeX1pnAXFK9jpP+Zs5Od3FOnBv5IhR2haa4ldbsTzFID9e1RoYvbFQIDAQAB",
+                            "publicKeyAlgorithm": "RSA",
+                            "publicKeyFormat": "X.509",
+                            "serialNumber": "85078157426496920958827089468591623647",
+                            "version": 3,
+                            "sha1Fingerprint": "48504e974c0dac5b5cd476c8202274b24c8c7172",
+                            "pemEncodedCert": "-----BEGIN CERTIFICATE-----\nMIIEZTCCA02gAwIBAgIQQAF1BIMUpMghjISpDBbN3zANBgkqhkiG9w0BAQsFADA/\nMSQwIgYDVQQKExtEaWdpdGFsIFNpZ25hdHVyZSBUcnVzdCBDby4xFzAVBgNVBAMT\nDkRTVCBSb290IENBIFgzMB4XDTIwMTAwNzE5MjE0MFoXDTIxMDkyOTE5MjE0MFow\nMjELMAkGA1UEBhMCVVMxFjAUBgNVBAoTDUxldCdzIEVuY3J5cHQxCzAJBgNVBAMT\nAlIzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuwIVKMz2oJTTDxLs\njVWSw/iC8ZmmekKIp10mqrUrucVMsa+Oa/l1yKPXD0eUFFU1V4yeqKI5GfWCPEKp\nTm71O8Mu243AsFzzWTjn7c9p8FoLG77AlCQlh/o3cbMT5xys4Zvv2+Q7RVJFlqnB\nU840yFLuta7tj95gcOKlVKu2bQ6XpUA0ayvTvGbrZjR8+muLj1cpmfgwF126cm/7\ngcWt0oZYPRfH5wm78Sv3htzB2nFd1EbjzK0lwYi8YGd1ZrPxGPeiXOZT/zqItkel\n/xMY6pgJdz+dU/nPAeX1pnAXFK9jpP+Zs5Od3FOnBv5IhR2haa4ldbsTzFID9e1R\noYvbFQIDAQABo4IBaDCCAWQwEgYDVR0TAQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8E\nBAMCAYYwSwYIKwYBBQUHAQEEPzA9MDsGCCsGAQUFBzAChi9odHRwOi8vYXBwcy5p\nZGVudHJ1c3QuY29tL3Jvb3RzL2RzdHJvb3RjYXgzLnA3YzAfBgNVHSMEGDAWgBTE\np7Gkeyxx+tvhS5B1/8QVYIWJEDBUBgNVHSAETTBLMAgGBmeBDAECATA/BgsrBgEE\nAYLfEwEBATAwMC4GCCsGAQUFBwIBFiJodHRwOi8vY3BzLnJvb3QteDEubGV0c2Vu\nY3J5cHQub3JnMDwGA1UdHwQ1MDMwMaAvoC2GK2h0dHA6Ly9jcmwuaWRlbnRydXN0\nLmNvbS9EU1RST09UQ0FYM0NSTC5jcmwwHQYDVR0OBBYEFBQusxe3WFbLrlAJQOYf\nr52LFMLGMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjANBgkqhkiG9w0B\nAQsFAAOCAQEA2UzgyfWEiDcx27sT4rP8i2tiEmxYt0l+PAK3qB8oYevO4C5z70kH\nejWEHx2taPDY/laBL21/WKZuNTYQHHPD5b1tXgHXbnL7KqC401dk5VvCadTQsvd8\nS8MXjohyc9z9/G2948kLjmE6Flh9dDYrVYA9x2O+hEPGOaEOa1eePynBgPayvUfL\nqjBstzLhWVQLGAkXXmNs+5ZnPBxzDJOLxhF2JIbeQAcH5H0tZrUlo5ZYyOqA7s9p\nO5b85o3AM/OJ+CktFBQtfvBhcJVd9wvlwPsk+uyOy2HI7mNxKKgsBTt375teA2Tw\nUdHkhVNcsAKX1H7GNNLOEADksd86wuoXvg==\n-----END CERTIFICATE-----\n",
+                            "canBeLeaf": true,
+                            "canBeCA": true,
+                            "selfSigned": false
+                        }
+                    ],
+                    "customCertificates": []
+                }
+            }
+        ],
+        "options": {
+            "is_secure": false
+        },
+        "variables": [
+            {
+                "name": "PMUSER_ORIGINSERVER",
+                "value": "o-codeclub.yohanlakhani.com",
+                "description": "",
+                "hidden": false,
+                "sensitive": false
+            }
+        ],
+        "comments": "The Default Rule template contains all the necessary and recommended behaviors. Rules are evaluated from top to bottom and the last matching rule wins."
+    }
+}
