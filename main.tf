@@ -10,37 +10,37 @@ locals {
     group_id        = "grp_93068"
     contract_id     = "ctr_M-1YX7F61"
     product_id      = "prd_SPM"
-    edge_hostname   = "test2.yohanlakhani.com.edgekey.net"
+    edge_hostname   = "test3.yohanlakhani.com.edgekey.net"
     certificate     = 97582
     ip_behavior     = "IPV6_PERFORMANCE"
-    json            = file("rules.json")
+    //json            = file("rules.json")
     tdenabled       = true
 }
 
 data "template_file" "rule_template" {
-  template = "${file("${path.module}/rules/main.json")}"
+  template = file("${path.module}/rules/main.json")
   vars = {
     snippets = "${path.module}/rules/snippets"
   }
 }
 
 data "template_file" "rules" {
-  template = "${data.template_file.rule_template.rendered}"
+  template = data.template_file.rule_template.rendered
   vars = {
     tdenabled = local.tdenabled
   }
 }
 
 resource "akamai_property" "test-yohanlakhani" {
-  name           = "test2.yohanlakhani.com"
+  name           = var.propertyName
   product_id     = local.product_id
   group_id      = local.group_id
   contract_id   = local.contract_id
   hostnames = {
-      "test2.yohanlakhani.com" = "test2.yohanlakhani.com.edgekey.net"
+      "test3.yohanlakhani.com" = "test3.yohanlakhani.com.edgekey.net"
   }
   rule_format = "latest"
-  rules     = "${data.template_file.rules.rendered}"
+  rules     = data.template_file.rules.rendered
   //rules = local.json 
 }
 
@@ -65,7 +65,7 @@ resource "akamai_edge_hostname" "edgeHostname" {
 }
 
 resource "akamai_property_activation" "test-yohanlakhani-staging" {
-     property_id =  "${akamai_property.test-yohanlakhani.id}"
+     property_id =  akamai_property.test-yohanlakhani.id
      contact  = [local.email] 
      version = akamai_property.test-yohanlakhani.latest_version
      # NOTE: Specifying a version as shown here will target the latest version created. This latest version will always be activated in staging.
@@ -73,10 +73,11 @@ resource "akamai_property_activation" "test-yohanlakhani-staging" {
      # not specifying network will target STAGING
 }
 
-
+/*
 resource "akamai_property_activation" "test-yohanlakhani-production" {
-     property_id =  "${akamai_property.test-yohanlakhani.id}"
+     property_id =  akamai_property.test-yohanlakhani.id
      contact  = [local.email] 
      version = akamai_property.test-yohanlakhani.latest_version
      network = "PRODUCTION"
 }
+*/
