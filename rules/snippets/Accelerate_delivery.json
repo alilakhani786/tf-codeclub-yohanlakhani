@@ -162,6 +162,29 @@
             "criteria": [],
             "criteriaMustSatisfy": "all",
             "comments": "Instruct edge servers to retrieve embedded resources before the browser requests them."
+        },
+        {
+            "name": "Adaptive acceleration",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "adaptiveAcceleration",
+                    "options": {
+                        "enablePreconnect": true,
+                        "enablePush": true,
+                        "enableRo": false,
+                        "preloadEnable": true,
+                        "source": "mPulse",
+                        "titleHttp2ServerPush": "",
+                        "titlePreconnect": "",
+                        "titlePreload": "",
+                        "titleRo": ""
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Automatically and continuously apply performance optimizations to your website using machine learning."
         }
     ],
     "behaviors": [],

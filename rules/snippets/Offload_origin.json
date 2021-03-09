@@ -10,7 +10,7 @@
                     "options": {
                         "behavior": "MAX_AGE",
                         "mustRevalidate": false,
-                        "ttl": "7d"
+                        "ttl": "30d"
                     }
                 }
             ],
@@ -107,7 +107,7 @@
                     "options": {
                         "behavior": "MAX_AGE",
                         "mustRevalidate": false,
-                        "ttl": "7d"
+                        "ttl": "30d"
                     }
                 }
             ],
@@ -138,7 +138,7 @@
                     "options": {
                         "behavior": "MAX_AGE",
                         "mustRevalidate": false,
-                        "ttl": "7d"
+                        "ttl": "30d"
                     }
                 }
             ],
@@ -271,6 +271,48 @@
             "comments": "Configure caching for HTTP redirects. The redirect is cached for the same TTL as a 200 HTTP response when this feature is enabled."
         },
         {
+            "name": "POST responses",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "cachePost",
+                    "options": {
+                        "enabled": false
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Define when HTTP POST requests should be cached. You should enable it under a criteria match."
+        },
+        {
+            "name": "GraphQL",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "graphqlCaching",
+                    "options": {
+                        "enabled": false
+                    }
+                }
+            ],
+            "criteria": [
+                {
+                    "name": "path",
+                    "options": {
+                        "matchCaseSensitive": false,
+                        "matchOperator": "MATCHES_ONE_OF",
+                        "normalize": false,
+                        "values": [
+                            "/graphql"
+                        ]
+                    }
+                }
+            ],
+            "criteriaMustSatisfy": "all",
+            "comments": "Define when your GraphQL queries should be cached."
+        },
+        {
             "name": "Uncacheable objects",
             "children": [],
             "behaviors": [
@@ -304,8 +346,7 @@
         {
             "name": "tieredDistribution",
             "options": {
-                "enabled": true,
-                "tieredDistributionMap": "CH2"
+                "enabled": true
             }
         },
         {
