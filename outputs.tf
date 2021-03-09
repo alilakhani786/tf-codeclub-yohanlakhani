@@ -3,7 +3,8 @@ output "aka_contract" {
 }
 
 output "aka_group" {
-  value = data.akamai_group.akagroup.id
+  value = data.akamai_group.akagroup.group_name
+  
 }
 
 output "aka_edgehost_ipbehavior" {

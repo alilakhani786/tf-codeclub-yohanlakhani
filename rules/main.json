@@ -34,12 +34,12 @@
                     ],
                     "customCertificateAuthorities": [
                         {
-                            "subjectCN": "codeclub.yohanlakhani.com",
+                            "subjectCN": "test1.yohanlakhani.com",
                             "subjectAlternativeNames": [
-                                "codeclub.yohanlakhani.com"
+                                "test1.yohanlakhani.com"
                             ],
                             "subjectRDNs": {
-                                "CN": "codeclub.yohanlakhani.com"
+                                "CN": "test1.yohanlakhani.com"
                             },
                             "issuerRDNs": {
                                 "C": "US",

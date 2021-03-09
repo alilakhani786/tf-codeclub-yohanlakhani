@@ -6,11 +6,11 @@ provider "akamai" {
 locals {
     email           = "nlakhani@akamai.com"
     group_name      = "Akamai Demo-M-1YX7F61"
-    cpcode_name     = "My CP Code"
+//    cpcode_name     = "My CP Code"
     group_id        = "grp_93068"
     contract_id     = "ctr_M-1YX7F61"
     product_id      = "prd_SPM"
-    edge_hostname   = "test3.yohanlakhani.com.edgekey.net"
+    edge_hostname   = "test1.yohanlakhani.com.edgekey.net"
     certificate     = 97582
     ip_behavior     = "IPV6_PERFORMANCE"
     //json            = file("rules.json")
@@ -37,7 +37,7 @@ resource "akamai_property" "test-yohanlakhani" {
   group_id      = local.group_id
   contract_id   = local.contract_id
   hostnames = {
-      "test3.yohanlakhani.com" = "test3.yohanlakhani.com.edgekey.net"
+      "test1.yohanlakhani.com" = "test1.yohanlakhani.com.edgekey.net"
   }
   rule_format = "latest"
   rules     = data.template_file.rules.rendered
@@ -46,17 +46,17 @@ resource "akamai_property" "test-yohanlakhani" {
 
 
 data "akamai_contract" "akacontract" {
-  group_name = var.group
+  group_name = var.groupName
 
 }
 
 data "akamai_group" "akagroup" {
-  group_name    = var.group
+  group_name    = var.groupName
   contract_id   = data.akamai_contract.akacontract.id
 }
 
 resource "akamai_edge_hostname" "edgeHostname" {
-  group_id      = local.group_id
+  group_id      = data.akamai_group.akagroup.id
   contract_id   = local.contract_id
   product_id    = local.product_id
   edge_hostname = local.edge_hostname
@@ -68,9 +68,6 @@ resource "akamai_property_activation" "test-yohanlakhani-staging" {
      property_id =  akamai_property.test-yohanlakhani.id
      contact  = [local.email] 
      version = akamai_property.test-yohanlakhani.latest_version
-     # NOTE: Specifying a version as shown here will target the latest version created. This latest version will always be activated in staging.
-     #version  = akamai_property.example.latest_version
-     # not specifying network will target STAGING
 }
 
 /*
