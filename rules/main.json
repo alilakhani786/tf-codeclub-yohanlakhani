@@ -2,12 +2,12 @@
     "rules": {
         "name": "default",
         "children": [
-            "#include:Augment_insights.json",
-            "#include:Accelerate_delivery.json",
-            "#include:Offload_origin.json",
-            "#include:Strengthen_security.json",
-            "#include:Increase_availability.json",
-            "#include:Minimize_payload.json"
+            ${file("${snippets}/Augment_insights.json")},
+            ${file("${snippets}/Accelerate_delivery.json")},
+            ${file("${snippets}/Offload_origin.json")},
+            ${file("${snippets}/Strengthen_security.json")},
+            ${file("${snippets}/Increase_availability.json")},
+            ${file("${snippets}/Minimize_payload.json")}
         ],
         "behaviors": [
             {
